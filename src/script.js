@@ -13,7 +13,7 @@ function updateClock() {
 
   // Hours adjusted by the current minutes
   const hours = (now.getHours() % 12) + minutes / 60;
-  
+
   const secondAngle = seconds * 6; // 6 degrees per second
   const minuteAngle = minutes * 6; // 6 degrees per minute
   const hourAngle = hours * 30; // 30 degrees per hour
@@ -45,14 +45,37 @@ function initializeClock() {
 initializeClock();
 setInterval(updateClock, 0.03);
 
-gsap.from(".bigFlowerPc",{
-    rotate:0,
-    stagger:0.3,
-})
-gsap.from(".bigFlowerMain",{
-    rotate:360,
-    delay:3,
-    duration:60,
-    repeat:-1,
-    ease:"none"
-})
+gsap.from(".bigFlowerPc", {
+  rotate: 0,
+  stagger: 0.3,
+});
+gsap.from(".bigFlowerMain", {
+  rotate: 360,
+  delay: 3,
+  duration: 60,
+  repeat: -1,
+  ease: "none",
+});
+
+gsap
+  .timeline({
+    repeat: -1,
+  })
+  .to(".smallFlowerChild", {
+    opacity: 0,
+    stagger: 0.3,
+  })
+  .to(".smallFlowerChild", {
+    opacity: 1,
+    stagger: 0.3,
+  });
+
+// gsap.fromTo(".smallFlowerChild",{
+//     opacity:0,
+// },{
+//     opacity:1,
+//     duration:0.5,
+//     stagger:0.3,
+//     repeat:-1,
+//     yoyo:true
+// })
